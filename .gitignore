@@ -1,3 +1,4 @@
 .env
 thunder-tests
 tests.js
+node_modules
