@@ -29,10 +29,14 @@ bot.on('text', async (ctx) => {
     })
     .then((response) => {
         console.log("response is: ",response.data);
+        // check if the response is of type undefined
+        console.log("Formatted response: " +response.data.split(`[["wrb.fr",null,"[[`)[1].split(`"]`)[0]);
+        console.log("Formatted response new: " +response.data.split(`[["wrb.fr",null,"[[\\"`)[1].split(`"]`)[0].replace(/\\n/g, '\n').replace(/\\/g, ''));
+        let responseMsg = response.data.split(`[["wrb.fr",null,"[[\\"`)[1].split(`"]`)[0].replace(/\\n/g, '\n').replace(/\\/g, '');
         const maxMsgLen = 4000;
         const messages = [];
-        for (let i = 0; i < response.data.length; i += maxMsgLen) {
-            messages.push(response.data.substring(i, i + maxMsgLen));
+        for (let i = 0; i < responseMsg.length; i += maxMsgLen) {
+            messages.push(responseMsg.substring(i, i + maxMsgLen));
         }
         messages.forEach((message) => {
             ctx.reply(message);
